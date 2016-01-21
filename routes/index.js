@@ -89,7 +89,7 @@ exports.list = function (req, res) {
 		        		|| (fs.statSync(fullPath).isFile() && availableExt.indexOf(path.extname(fullPath) >= 0))
 		        		);
 		    }).forEach(function (dirPath) {
-		    	list.push(dirPath.replace(bookPath + '/', ''));
+		    	list.push(dirPath.replace(bookPath, '').replace('\\', '').replace('/', ''));
 		    });
 		}
 
