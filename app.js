@@ -5,7 +5,6 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , user = require('./routes/user')
   , http = require('http')
   , path = require('path');
 
@@ -31,7 +30,6 @@ if ('development' === app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/index', routes.index);
-app.get('/users', user.list);
 app.get('/list', routes.list);
 app.get('/list/:name', routes.list);
 app.get('/list/:name/:bookno', routes.list);
