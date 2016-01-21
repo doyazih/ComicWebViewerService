@@ -80,15 +80,18 @@ exports.list = function (req, res) {
 		
 		var availableExt = ['.jpg', '.png'];
 		
-		items.map(function (item) {
-	        return path.join(bookPath, item);
-	    }).filter(function (fullPath) {
-	        return (fs.statSync(fullPath).isDirectory() 
-	        		|| (fs.statSync(fullPath).isFile() && availableExt.indexOf(path.extname(fullPath) >= 0))
-	        		);
-	    }).forEach(function (dirPath) {
-	    	list.push(dirPath.replace(bookPath + '/', ''));
-	    });
+		if (items && Array.isArray(items) && items.length > 0)
+		{
+			items.map(function (item) {
+		        return path.join(bookPath, item);
+		    }).filter(function (fullPath) {
+		        return (fs.statSync(fullPath).isDirectory() 
+		        		|| (fs.statSync(fullPath).isFile() && availableExt.indexOf(path.extname(fullPath) >= 0))
+		        		);
+		    }).forEach(function (dirPath) {
+		    	list.push(dirPath.replace(bookPath + '/', ''));
+		    });
+		}
 
 		res.render('list', { path: bookPath, items: list, name: bookName, bookno: bookNo });
 	});
