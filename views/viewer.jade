@@ -1,0 +1,33 @@
+extends layout
+
+block content
+	p #{name}:#{bookno}:#{page}&nbsp;&nbsp;&nbsp<a id="btnNextBook" href="#">Next</a>
+	
+	#navi
+	
+		input(id="hidName" type="hidden" value="#{name}")/
+		input(id="hidBookNo" type="hidden" value="#{bookno}")/
+		input(id="hidCurrentPage" type="hidden" value="#{page}")/
+		
+		a(id="btnFirst" href="#") First&nbsp;&nbsp;&nbsp;
+		a(id="btnPrev" href="#") Prev&nbsp;&nbsp;&nbsp;
+		a(id="btnNext" href="#") Next&nbsp;&nbsp;&nbsp;Page no:
+		input(id="txtPage" type="text" style="width:40px;")/
+		input(id="btnGoPage" type="button" onclick="goPage();" value="Go")/ 
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fit wtidth:
+		input(id="chkFitWidth" type="checkbox")/
+		&nbsp;&nbsp;fit height:
+		input(id="chkFitHeight" type="checkbox")/
+		&nbsp;&nbsp;show two pages:
+		
+		if chkShowTwoPages
+			input(id="chkShowTwoPages" type="checkbox" checked)/
+		else
+			input(id="chkShowTwoPages" type="checkbox")/
+			
+	#main
+		table(id="imgMain")
+			tr
+				td
+					img(id="imgMainRight" src="/comics/#{name}/#{bookno}/#{page}")
+			

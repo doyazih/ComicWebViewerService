@@ -1,0 +1,12 @@
+extends layout
+
+block content
+
+	input(id="hidName" type="hidden" value="#{name}")/
+	input(id="hidBookNo" type="hidden" value="#{bookno}")/
+	
+	p #{path}
+	
+	ul
+		each item in items
+			li <a class="list-item">#{item}</a>&nbsp;&nbsp;&nbsp;<a class="list-go-viewer">[Go Viewer]</a>
