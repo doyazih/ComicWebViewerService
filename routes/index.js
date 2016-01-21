@@ -82,7 +82,7 @@ exports.list = function (req, res) {
 		
 		if (items && Array.isArray(items) && items.length > 0)
 		{
-			items.map(function (item) {
+			items.sort(naturalCompare).map(function (item) {
 		        return path.join(bookPath, item);
 		    }).filter(function (fullPath) {
 		        return (fs.statSync(fullPath).isDirectory() 
@@ -95,4 +95,27 @@ exports.list = function (req, res) {
 
 		res.render('list', { path: bookPath, items: list, name: bookName, bookno: bookNo });
 	});
+};
+
+var chunkRgx = /(_+)|([0-9]+)|([^0-9_]+)/g;
+function naturalCompare(a, b) {
+    var ax = [], bx = [];
+    
+    a.replace(chunkRgx, function(_, $1, $2, $3) {
+        ax.push([$1 || "0", $2 || Infinity, $3 || ""])
+    });
+    b.replace(chunkRgx, function(_, $1, $2, $3) {
+        bx.push([$1 || "0", $2 || Infinity, $3 || ""])
+    });
+    
+    while(ax.length && bx.length) {
+        var an = ax.shift();
+        var bn = bx.shift();
+        var nn = an[0].localeCompare(bn[0]) || 
+                 (an[1] - bn[1]) || 
+                 an[2].localeCompare(bn[2]);
+        if(nn) return nn;
+    }
+    
+    return ax.length - bx.length;
 };
