@@ -88,7 +88,11 @@ var initButton = function () {
 		}
 	});
 	
-	$('a.list-item').click(function (e) {
+	$('a.list-file').click(function (e) {
+		window.location.href = 'http://' + window.location.host + '/comics/' + bookName + '/' + bookNo + '/' + $(this).text();
+	});
+	
+	$('a.list-directory').click(function (e) {
 		window.location.href = document.URL + '/' + $(this).text();
 	});
 	
@@ -99,7 +103,7 @@ var initButton = function () {
 		
 		if(!bookNo || bookNo == '')
 			bookNo = '01';
-		window.location.href = 'http://' + document.domain + '/viewer/' + bookName + '/' + bookNo;
+		window.location.href = 'http://' + window.location.host + '/viewer/' + bookName + '/' + bookNo;
 	});
 };
 

@@ -9,4 +9,9 @@ block content
 	
 	ul
 		each item in items
-			li <a class="list-item">#{item}</a>&nbsp;&nbsp;&nbsp;<a class="list-go-viewer">[Go Viewer]</a>
+			li 
+				if item.isFile
+					<a class="list-file">#{item.name}</a>&nbsp;&nbsp;&nbsp;<a class="list-go-viewer">[Go Viewer]</a>
+				else
+					<a class="list-directory">#{item.name}</a>&nbsp;&nbsp;&nbsp;<a class="list-go-viewer">[Go Viewer]</a>
+					
